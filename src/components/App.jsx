@@ -8,17 +8,14 @@ class App extends Component {
     contacts: [],
     filter: '',
   };
-  // addContact = newContact => {
-  //   this.setState(prevState => ({
-  //     contacts: [...prevState.contacts, newContact],
-  //   }));
-  // };
   addContact = newContact => {
-  this.setState(prevState => {
-    const updatedContacts = Array.isArray(prevState.contacts) ? [...prevState.contacts, newContact] : [newContact];
-    return { contacts: updatedContacts };
-  });
-};
+    this.setState(prevState => {
+      const updatedContacts = Array.isArray(prevState.contacts)
+        ? [...prevState.contacts, newContact]
+        : [newContact];
+      return { contacts: updatedContacts };
+    });
+  };
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
@@ -27,28 +24,21 @@ class App extends Component {
   handleFilterChange = e => {
     this.setState({ filter: e.currentTarget.value });
   };
-  // getFilteredContacts = () => {
-  //   const { contacts, filter } = this.state;
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  // };
   getFilteredContacts() {
-  const { contacts, filter } = this.state;
-  if (contacts !== null) {
-    const filteredContacts = contacts.filter((contact) => {
-      return contact.name.toLowerCase().includes(filter.toLowerCase());
-    });
-    return filteredContacts;
+    const { contacts, filter } = this.state;
+    if (contacts !== null) {
+      const filteredContacts = contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(filter.toLowerCase());
+      });
+      return filteredContacts;
+    }
+    return [];
   }
-  return [];
-}
-
   componentDidMount() {
     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
     this.setState({ contacts: parsedContacts });
     if (parsedContacts) {
-      this.setState({contacts: parsedContacts})
+      this.setState({ contacts: parsedContacts });
     }
   }
   componentDidUpdate(prevProps, prevState) {

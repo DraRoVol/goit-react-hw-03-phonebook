@@ -16,8 +16,9 @@ class ContactForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { name, number } = this.state;
-    // const nameList = this.props.contactList.map(con => con.name);
-     const nameList = this.props.contactList ? this.props.contactList.map(con => con.name) : [];
+    const nameList = this.props.contactList
+      ? this.props.contactList.map(con => con.name)
+      : [];
     if (nameList.includes(name.trim())) {
       alert(`${name} is already in contacts`);
     } else {
